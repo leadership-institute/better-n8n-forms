@@ -117,9 +117,10 @@ export class CustomFormTrigger implements INodeType {
     // Verify API key from credentials
     const credentials = await this.getCredentials("betterFormsApi");
     const expectedApiKey = credentials.apiKey as string;
+    const queryData = this.getQueryData() as { apiKey?: string };
     const providedApiKey =
       (req.headers["x-api-key"] as string) ||
-      (req.query.apiKey as string) ||
+      queryData.apiKey ||
       "";
 
     if (!expectedApiKey || providedApiKey !== expectedApiKey) {
