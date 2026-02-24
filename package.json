@@ -38,7 +38,7 @@
       "dist/credentials/BetterFormsApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/CustomFormTrigger/CustomFormTrigger.node.js"
+      "dist/nodes/BetterFormsTrigger/BetterFormsTrigger.node.js"
     ]
   },
   "devDependencies": {
