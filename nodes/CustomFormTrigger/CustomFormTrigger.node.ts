@@ -9,7 +9,7 @@ import { NodeConnectionTypes } from "n8n-workflow";
 
 import type { FormConfig, FormSubmissionResponse } from "./types";
 
-export class CustomFormTrigger implements INodeType {
+export class BetterFormsTrigger implements INodeType {
   description: INodeTypeDescription = {
     displayName: "BetterForms Trigger",
     name: "BetterFormsTrigger",
