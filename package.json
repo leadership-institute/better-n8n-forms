@@ -22,10 +22,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "n8n-node build",
-    "dev": "n8n-node dev",
-    "lint": "n8n-node lint",
-    "lint:fix": "n8n-node lint --fix"
+    "build": "npx n8n-node build",
+    "dev": "npx n8n-node dev",
+    "lint": "npx n8n-node lint",
+    "lint:fix": "npx n8n-node lint --fix",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "dist"
