@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-betterforms",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "BetterForms custom form trigger node for n8n",
   "license": "MIT",
   "author": {
