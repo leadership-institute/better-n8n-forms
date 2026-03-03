@@ -192,12 +192,34 @@ export class BetterFormsTrigger implements INodeType {
 
       res.status(200).json(response);
 
+      // Parse any stringified JSON values into real objects/arrays
+      const parseValue = (val: unknown): unknown => {
+        if (typeof val !== "string") return val;
+        const trimmed = val.trim();
+        if (
+          (trimmed.startsWith("{") && trimmed.endsWith("}")) ||
+          (trimmed.startsWith("[") && trimmed.endsWith("]"))
+        ) {
+          try {
+            return JSON.parse(trimmed);
+          } catch {
+            return val;
+          }
+        }
+        return val;
+      };
+
+      const parsedBody: IDataObject = {};
+      for (const key of Object.keys(body)) {
+        parsedBody[key] = parseValue(body[key]) as IDataObject[string];
+      }
+
       // Merge submission data with form field definitions
       const mergedFields: IDataObject[] = formConfig.fields.map((field) => ({
         fieldName: field.fieldName,
         label: field.label,
         type: field.type,
-        value: body[field.fieldName] ?? null,
+        value: parseValue(parsedBody[field.fieldName]) ?? null,
         required: field.required ?? false,
         options: field.options,
       }));
@@ -208,7 +230,7 @@ export class BetterFormsTrigger implements INodeType {
           [
             {
               json: {
-                submission: body,
+                submission: parsedBody,
                 formConfig: {
                   formTitle: formConfig.formTitle,
                   formDescription: formConfig.formDescription,
